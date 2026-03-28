@@ -10,7 +10,7 @@ class Hidratacao(models.Model):
 
 #alimentacao
 class Alimentacao(models.Model):
-    usario = models.ForeignKey(User,on_delete=models.CASCADE)
+    usuario = models.ForeignKey(User,on_delete=models.CASCADE)
     data_registro = models.DateField()
     quantidade_refeicoes = models.IntegerField()
     horarios = models.CharField(max_length=200)

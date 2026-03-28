@@ -1,10 +1,8 @@
 from django.contrib import admin
-from django.urls import path, include
-from django.contrib.auth import views as auth_views
+from django.urls import include, path
+from vitaly.api.v1.router import urlpatterns as api_urlpatterns
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('vitaly.urls')),
-    
-    path('accounts/login/', auth_views.LoginView.as_view(), name='login'),
+    path('api/v1/', include(api_urlpatterns)),
 ]
