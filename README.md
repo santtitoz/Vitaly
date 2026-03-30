@@ -1,4 +1,4 @@
-# Vitaly - Health & Habit Tracker API
+# Vitaly - API Saúde e Hábitos
 
 Este é o projeto **Vitaly**, uma API desenvolvida em Django e Django REST Framework para o acompanhamento de hábitos saudáveis, como hidratação, alimentação, estudos, sono e treinos.
 
