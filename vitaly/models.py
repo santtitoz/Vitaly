@@ -16,7 +16,7 @@ class Alimentacao(models.Model):
     horarios = models.CharField(max_length=200)
     classificacao = models.CharField(max_length= 50)
 
-#estudus 
+# estudos 
 class Estudo(models.Model):
     usuario = models.ForeignKey(User,on_delete=models.CASCADE)
     data_registro = models.DateField()
@@ -35,6 +35,6 @@ class Sono (models.Model):
 class Treino(models.Model):
     usuario = models.ForeignKey(User,on_delete=models.CASCADE)
     data_registro = models.DateField()
-    quantidade_planejada = models.IntegerField
-    quantidade_realizada = models.IntegerField
+    quantidade_planejada = models.IntegerField()
+    quantidade_realizada = models.IntegerField()
     status = models.CharField(max_length=50)
