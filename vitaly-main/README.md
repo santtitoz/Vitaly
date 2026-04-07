@@ -17,7 +17,8 @@ Um aplicativo Django para rastreamento de hábitos de saúde e bem-estar. Permit
 - **Django**: Framework web
 - **Django REST Framework**: Para construção da API
 - **Django REST Framework Simple JWT**: Autenticação baseada em tokens JWT
-- **SQLite**: Banco de dados (padrão do Django)
+- **PostgreSQL**: Banco de dados relacional
+- **Python-decouple**: Gerenciamento de variáveis de ambiente
 
 ## Instalação
 
@@ -36,22 +37,33 @@ Um aplicativo Django para rastreamento de hábitos de saúde e bem-estar. Permit
    .\venv\Scripts\activate.bat
    ```
 
-3. **Instale as dependências**:
+3. **Configure o banco de dados**:
+   Crie um arquivo `.env` na raiz do projeto com as variáveis:
+   ```
+   DB_ENGINE=django.db.backends.postgresql
+   DB_NAME=seu_banco_dados
+   DB_USER=seu_usuario
+   DB_PASSWORD=sua_senha
+   DB_HOST=localhost
+   DB_PORT=5432
+   ```
+
+4. **Instale as dependências**:
    ```bash
    pip install -r requirements.txt
    ```
 
-4. **Execute as migrações**:
+5. **Execute as migrações**:
    ```bash
    python manage.py migrate
    ```
 
-5. **Crie um superusuário (opcional)**:
+6. **Crie um superusuário (opcional)**:
    ```bash
    python manage.py createsuperuser
    ```
 
-6. **Execute o servidor**:
+7. **Execute o servidor**:
    ```bash
    python manage.py runserver
    ```
