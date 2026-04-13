@@ -1,52 +1,148 @@
-# Vitaly - Health & Habit Tracker API
+# Vitaly
 
-Este é o projeto **Vitaly**, uma API desenvolvida em Django e Django REST Framework para o acompanhamento de hábitos saudáveis, como hidratação, alimentação, estudos, sono e treinos.
+Um aplicativo Django para rastreamento de hábitos de saúde e bem-estar. Permite monitorar hidratação, alimentação, estudo, sono, treinos e perfil pessoal através de uma API REST.
 
-## 🗺️ Mapa de Rotas (Endpoints)
+## Funcionalidades
 
-Abaixo estão os endpoints disponíveis na API:
+- **Perfil do Usuário**: Gerenciamento de dados pessoais (nome, idade, peso, altura, objetivo)
+- **Hidratação**: Registro diário de consumo de água
+- **Alimentação**: Controle de refeições e horários
+- **Estudo**: Acompanhamento de horas de estudo e produtividade
+- **Sono**: Registro de horários de dormir/acordar
+- **Treino**: Controle de exercícios planejados vs realizados
+- **API REST**: Endpoints para todas as funcionalidades com autenticação JWT
 
-| Endpoint | Método | Descrição |
-| :--- | :--- | :--- |
-| `/admin/` | `GET/POST` | Interface de administração do Django. |
-| `/api/v1/hidratacoes/` | `GET/POST/PUT/DELETE` | Gerenciamento de registros de hidratação (ml, meta). |
-| `/api/v1/alimentacoes/` | `GET/POST/PUT/DELETE` | Gerenciamento de registros de alimentação e horários. |
-| `/api/v1/estudos/` | `GET/POST/PUT/DELETE` | Gerenciamento de registros de horas de estudo e produtividade. |
-| `/api/v1/sonos/` | `GET/POST/PUT/DELETE` | Gerenciamento de registros de sono (hora de dormir/acordar). |
-| `/api/v1/treinos/` | `GET/POST/PUT/DELETE` | Gerenciamento de registros de treinos e status. |
+## Tecnologias Utilizadas
 
-### Diagrama de Arquitetura
+- **Django**: Framework web
+- **Django REST Framework**: Para construção da API
+- **Django REST Framework Simple JWT**: Autenticação baseada em tokens JWT
+- **PostgreSQL**: Banco de dados relacional
+- **Python-decouple**: Gerenciamento de variáveis de ambiente
 
-```mermaid
-graph TD
-    User((Usuário)) --> API[Vitaly API /api/v1/]
-    API --> Hidratacao[Hidratação]-> Alimentacao[Alimentação]
-    API --> Estudo[Estudo]
-    API --> Sono[Sono]
-    API --> Treino[Treino]
-    API --> DjangoAdmin[D
-    API -jango Admin /admin/]
-    
-    subgraph Modelos
-        Hidratacao
-        Alimentacao
-        Estudo
-        Sono
-        Treino
-    end
+## Instalação
+
+1. **Clone o repositório**:
+   ```bash
+   git clone <url-do-repositorio>
+   cd vitaly-main
+   ```
+
+2. **Crie e ative o ambiente virtual**:
+   ```bash
+   python -m venv venv
+   # No Windows (PowerShell):
+   .\venv\Scripts\Activate.ps1
+   # No Windows (cmd):
+   .\venv\Scripts\activate.bat
+   ```
+
+3. **Configure o banco de dados**:
+   Crie um arquivo `.env` na raiz do projeto com as variáveis:
+   ```
+   DB_ENGINE=django.db.backends.postgresql
+   DB_NAME=seu_banco_dados
+   DB_USER=seu_usuario
+   DB_PASSWORD=sua_senha
+   DB_HOST=localhost
+   DB_PORT=5432
+   ```
+
+4. **Instale as dependências**:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+5. **Execute as migrações**:
+   ```bash
+   python manage.py migrate
+   ```
+
+6. **Crie um superusuário (opcional)**:
+   ```bash
+   python manage.py createsuperuser
+   ```
+
+7. **Execute o servidor**:
+   ```bash
+   python manage.py runserver
+   ```
+
+O aplicativo estará disponível em `http://127.0.0.1:8000/`
+
+## Uso da API
+
+### Autenticação
+
+A API usa autenticação JWT. Para obter um token:
+
+```bash
+POST /api/token/
+{
+  "username": "seu_usuario",
+  "password": "sua_senha"
+}
 ```
 
-## 🛠️ Tecnologias Utilizadas
+Use o token no header: `Authorization: Bearer <token>`
 
-- **Python** 3.x
-- **Django** 6.0 (ou compatível)
-- **Django REST Framework** (DRF)
-- **SQLite** (Banco de dados padrão)
+### Endpoints Principais
 
-## 🚀 Como Executar
+- `GET/POST/PUT/DELETE /api/v1/users/` - Usuários
+- `GET/POST/PUT/DELETE /api/v1/perfis/` - Perfis
+- `GET/POST/PUT/DELETE /api/v1/hidratacoes/` - Registros de hidratação
+- `GET/POST/PUT/DELETE /api/v1/alimentacoes/` - Registros de alimentação
+- `GET/POST/PUT/DELETE /api/v1/estudos/` - Registros de estudo
+- `GET/POST/PUT/DELETE /api/v1/sonos/` - Registros de sono
+- `GET/POST/PUT/DELETE /api/v1/treinos/` - Registros de treino
 
-1. Certifique-se de ter o Python instalado.
-2. Ative o ambiente virtual (se aplicável).
-3. Instale as dependências: `pwip install django djangorestframework`
-4. Execute as migrações: `python manage.py migrate`
-5. Inicie o servidor: `python manage.py runserver`
+### Exemplo de Uso
+
+1. **Criar um usuário**:
+   ```bash
+   POST /api/v1/users/
+   {
+     "username": "usuario_exemplo",
+     "email": "email@exemplo.com",
+     "password": "senha_segura"
+   }
+   ```
+
+2. **Registrar hidratação**:
+   ```bash
+   POST /api/v1/hidratacoes/
+   Authorization: Bearer <token>
+   {
+     "usuario": 1,
+     "data_registro": "2024-01-01",
+     "quantidade_ml": 2000,
+     "meta_ml": 2500
+   }
+   ```
+
+## Estrutura do Projeto
+
+```
+vitaly-main/
+├── config/                 # Configurações do Django
+├── vitaly/                 # App principal
+│   ├── api/v1/            # API versão 1
+│   │   ├── serializers.py # Serializers DRF
+│   │   ├── viewsets.py    # ViewSets DRF
+│   │   └── router.py      # Configuração de rotas
+│   ├── migrations/        # Migrações do banco
+│   ├── models.py          # Modelos de dados
+│   └── views.py           # Views (se usado)
+├── db.sqlite3             # Banco de dados
+├── manage.py              # Script de gerenciamento Django
+├── requirements.txt       # Dependências Python
+└── venv/                  # Ambiente virtual (não versionado)
+```
+
+## Contribuição
+
+1. Fork o projeto
+2. Crie uma branch para sua feature (`git checkout -b feature/nova-feature`)
+3. Commit suas mudanças (`git commit -am 'Adiciona nova feature'`)
+4. Push para a branch (`git push origin feature/nova-feature`)
+5. Abra um Pull Request

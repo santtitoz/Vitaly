@@ -1,42 +1,86 @@
 from rest_framework import viewsets
-from rest_framework.authentication import TokenAuthentication
+from django.contrib.auth.models import User
+from vitaly.models import Hidratacao, Alimentacao, Estudo, Sono, Treino, Perfil
 from rest_framework.permissions import IsAuthenticated
-from vitaly.models import Hidratacao, Alimentacao, Estudo, Sono, Treino
-from .serializers import Alimentacaoserializer, Hidratacaoserializer, Estudoserializer, Sonoserializer, Treinoserializer
+from .serializers import Alimentacaoserializer, Hidratacaoserializer, Estudoserializer, PerfilSerializer, Sonoserializer, Treinoserializer , UserSerializer
 
-
-class BaseUserViewSet(viewsets.ModelViewSet):
-    """Base ViewSet that filters by authenticated user and auto-assigns usuario on create."""
-    authentication_classes = [TokenAuthentication]
-    permission_classes = [IsAuthenticated]
-
-    def get_queryset(self):
-        return super().get_queryset().filter(usuario=self.request.user)
-
-    def perform_create(self, serializer):
-        serializer.save(usuario=self.request.user)
-
-
-class HidratacaoViewSet(BaseUserViewSet):
+class HidratacaoViewSet(viewsets.ModelViewSet):
     queryset = Hidratacao.objects.all()
     serializer_class = Hidratacaoserializer
+    permission_classes = [IsAuthenticated]
 
-
-class AlimentacaoViewSet(BaseUserViewSet):
+class AlimentacaoViewSet(viewsets.ModelViewSet):
     queryset = Alimentacao.objects.all()
     serializer_class = Alimentacaoserializer
+    permission_classes = [IsAuthenticated]
 
-
-class EstudoViewSet(BaseUserViewSet):
+class EstudoViewSet(viewsets.ModelViewSet):
     queryset = Estudo.objects.all()
     serializer_class = Estudoserializer
+    permission_classes = [IsAuthenticated]
 
-
-class SonoViewSet(BaseUserViewSet):
+class SonoViewSet(viewsets.ModelViewSet):
     queryset = Sono.objects.all()
     serializer_class = Sonoserializer
+    permission_classes = [IsAuthenticated]
 
-
-class TreinoViewSet(BaseUserViewSet):
+class TreinoViewSet(viewsets.ModelViewSet):
     queryset = Treino.objects.all()
     serializer_class = Treinoserializer
+    permission_classes = [IsAuthenticated]
+
+
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = [IsAuthenticated]
+
+
+class PerfilViewSet(viewsets.ModelViewSet):
+    queryset = Perfil.objects.all()
+    serializer_class = PerfilSerializer
+    permission_classes = [IsAuthenticated]
+
+class AuditoriaViewSet(viewsets.ViewSet):
+    permission_classes = [IsAuthenticated]
+
+    def list(self, request):
+        user = request.user
+        periodo = request.GET.get("periodo", "dia")
+
+        hoje = timezone.now()
+
+        if periodo == "dia":
+            logs = LogAtividade.objects.filter(
+                usuario=user,
+                inicio__date=hoje.date()
+            )
+
+        elif periodo == "semana":
+            inicio_semana = hoje - timezone.timedelta(days=7)
+            logs = LogAtividade.objects.filter(
+                usuario=user,
+                inicio__gte=inicio_semana
+            )
+
+        elif periodo == "mes":
+            logs = LogAtividade.objects.filter(
+                usuario=user,
+                inicio__month=hoje.month
+            )
+
+        else:
+            logs = LogAtividade.objects.filter(usuario=user)
+
+        logs = logs.annotate(
+            duracao=ExpressionWrapper(
+                F('fim') - F('inicio'),
+                output_field=DurationField()
+            )
+        )
+
+        resumo = logs.values('tipo').annotate(
+            total=Sum('duracao')
+        )
+
+        return Response(resumo)
