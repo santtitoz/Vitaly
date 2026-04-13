@@ -1,0 +1,349 @@
+/* ── Dashboard Layout ── */
+.dashboardGrid {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 8px;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.leftColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-height: 0;
+  height: 100%;
+}
+
+.rightColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-height: 0;
+  height: 100%;
+}
+
+/* ── Progress Rings Row ── */
+.ringsRow {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+
+.progressRing {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.progressRingInfo {
+  text-align: center;
+}
+
+.progressRingLabel {
+  display: block;
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.progressRingValue {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* ── Chart Card ── */
+.chartCard {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  animation: fadeIn 0.5s ease forwards;
+}
+
+.chartHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 8px;
+  flex-shrink: 0;
+}
+
+.chartTitle {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.chartSubtitle {
+  font-size: 10px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.chartLegend {
+  display: flex;
+  gap: 12px;
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+
+.legendDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+/* ── Heatmap ── */
+.heatmapCard {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  animation: fadeIn 0.6s ease forwards;
+}
+
+.heatmapGrid {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 0;
+  margin-top: 8px;
+}
+
+.heatmapRow {
+  display: grid;
+  grid-template-columns: 80px repeat(7, 1fr);
+  gap: 6px;
+  margin-bottom: 4px;
+  align-items: center;
+  flex: 1;
+}
+
+.heatmapLabel {
+  font-size: 11px;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.heatmapDayHeader {
+  font-size: 10px;
+  color: var(--text-muted);
+  text-align: center;
+  font-weight: 500;
+}
+
+.heatmapCell {
+  height: 100%;
+  min-height: 16px;
+  border-radius: 4px;
+  transition: all var(--transition-fast);
+  cursor: pointer;
+}
+
+.heatmapCell:hover {
+  transform: scale(1.12);
+  box-shadow: 0 0 10px rgba(139, 92, 246, 0.3);
+}
+
+.heatmapLegendRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  margin-top: 8px;
+  flex-shrink: 0;
+}
+
+.heatmapLegendLabel {
+  font-size: 10px;
+  color: var(--text-muted);
+  margin: 0 4px;
+}
+
+.heatmapLegendCell {
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+}
+
+.routineCard {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  animation: fadeIn 0.5s ease 0.1s both;
+}
+
+.routineHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.routineRing {
+  display: flex;
+  justify-content: center;
+  padding: 4px 0;
+}
+
+.routineStats {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border-secondary);
+}
+
+.routineStat {
+  text-align: center;
+}
+
+.routineStatValue {
+  display: block;
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.routineStatLabel {
+  display: block;
+  font-size: 10px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+/* ── Level Card ── */
+.levelCard {
+  flex-shrink: 0;
+  animation: fadeIn 0.5s ease 0.2s both;
+}
+
+.levelHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.levelLabel {
+  display: block;
+  font-size: 11px;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.levelNumber {
+  display: block;
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1.1;
+}
+
+/* ── Streaks ── */
+.streaksCard {
+  flex-shrink: 0;
+  animation: fadeIn 0.5s ease 0.3s both;
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.sectionHeader h4 {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.streaksGrid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 6px;
+}
+
+.streakItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px 4px;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.streakCount {
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.streakLabel {
+  font-size: 9px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+.streakBest {
+  font-size: 10px;
+  color: var(--text-muted);
+  text-align: center;
+  margin-top: 8px;
+}
+
+/* ── Achievements ── */
+.achievementsCard {
+  flex-shrink: 0;
+  animation: fadeIn 0.5s ease 0.4s both;
+}
+
+.achievementsList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.achievementBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  font-size: 11px;
+  font-weight: 600;
+  border: 1px solid;
+}
+
+/* ── Rings Card (right column top) ── */
+.ringsCard {
+  flex-shrink: 0;
+  animation: fadeIn 0.4s ease both;
+}
+
+@media (max-width: 1100px) {
+  .dashboardGrid {
+    grid-template-columns: 1fr;
+    /* Removed overflow-y: auto to strictly enforce no-scroll on all viewport sizes */
+  }
+
+  .rightColumn {
+    order: -1;
+  }
+
+  .streaksGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

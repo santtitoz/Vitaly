@@ -1,0 +1,172 @@
+/* ── Bento Grid Core ── */
+.pageContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  padding: 12px 16px;
+  overflow: hidden;
+  gap: 8px;
+}
+
+/* Base Bento Grid */
+.bentoGrid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: repeat(12, 1fr);
+  gap: 8px;
+  height: 100%;
+  width: 100%;
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* Bento Cells generic class */
+.bentoCell {
+  background: var(--bg-card);
+  border: none;
+  border-radius: var(--radius-lg);
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  min-height: 0; /* important for flex children */
+  overflow: hidden;
+  transition: border-color var(--transition-fast);
+}
+
+.bentoCell:hover {
+  border-color: var(--border-primary);
+}
+
+/* Standard Header for cells */
+.cellHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  flex-shrink: 0;
+}
+
+.cellTitle {
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.cellBody {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  position: relative; /* for absolute children or charts */
+}
+
+/* ── Pre-configured Spans (Rows) ── */
+.rowSpan1 { grid-row: span 1; }
+.rowSpan2 { grid-row: span 2; }
+.rowSpan3 { grid-row: span 3; }
+.rowSpan4 { grid-row: span 4; }
+.rowSpan5 { grid-row: span 5; }
+.rowSpan6 { grid-row: span 6; }
+.rowSpan7 { grid-row: span 7; }
+.rowSpan8 { grid-row: span 8; }
+.rowSpan12 { grid-row: span 12; }
+
+/* ── Pre-configured Spans (Cols) ── */
+.colSpan1 { grid-column: span 1; }
+.colSpan2 { grid-column: span 2; }
+.colSpan3 { grid-column: span 3; }
+.colSpan4 { grid-column: span 4; }
+.colSpan5 { grid-column: span 5; }
+.colSpan6 { grid-column: span 6; }
+.colSpan7 { grid-column: span 7; }
+.colSpan8 { grid-column: span 8; }
+.colSpan9 { grid-column: span 9; }
+.colSpan12 { grid-column: span 12; }
+
+/* ── Shared Elements ── */
+.statValue {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1.1;
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.statLabel {
+  font-size: 10px;
+  color: var(--text-muted);
+  margin-top: 4px;
+  font-weight: 500;
+}
+
+.statUnit {
+  font-size: 10px;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+/* Progress bar inside Bento */
+.progressBar {
+  width: 100%;
+  height: 6px;
+  background: rgba(255,255,255,0.05);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  margin-top: auto;
+}
+
+.progressBarFill {
+  height: 100%;
+  border-radius: var(--radius-full);
+  transition: width 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* List Items (Sessões, Registros) */
+.listContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  overflow: hidden; /* No scroll */
+}
+
+.listItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 12px;
+  background: rgba(255,255,255,0.02);
+  border: none;
+  border-radius: var(--radius-md);
+  flex-shrink: 0;
+}
+
+.deleteBtn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  transition: color var(--transition-fast);
+}
+
+.deleteBtn:hover {
+  color: var(--accent-red);
+}
+
+/* Empty State */
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  height: 100%;
+  color: var(--text-muted);
+  text-align: center;
+}

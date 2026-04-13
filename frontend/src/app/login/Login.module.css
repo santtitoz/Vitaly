@@ -1,0 +1,143 @@
+.container {
+  min-height: 100vh;
+  width: 100vw;
+  background-color: var(--bg-primary); /* #000000 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.authCard {
+  width: 100%;
+  max-width: 420px;
+  background: var(--bg-card); /* #101013 */
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 20px;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.logo {
+  font-size: 28px;
+  font-weight: 800;
+  background: linear-gradient(135deg, #a78bfa, #c084fc);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 8px;
+  letter-spacing: -0.5px;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 4px;
+}
+
+.subtitle {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.input {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  padding: 14px 16px;
+  color: #fff;
+  font-size: 14px;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.input:focus {
+  border-color: #6B82EE;
+  background: rgba(255,255,255,0.05);
+}
+
+.input::placeholder {
+  color: rgba(255,255,255,0.2);
+}
+
+.submitBtn {
+  margin-top: 8px;
+  background: linear-gradient(135deg, #6B82EE, #4c1d95);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 14px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s, opacity 0.2s;
+}
+
+.submitBtn:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.submitBtn:active {
+  transform: translateY(1px);
+}
+
+.toggleAction {
+  text-align: center;
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-top: 8px;
+}
+
+.toggleLink {
+  color: #6B82EE;
+  font-weight: 600;
+  cursor: pointer;
+  margin-left: 6px;
+}
+
+.toggleLink:hover {
+  text-decoration: underline;
+}
+
+.dotsBackground {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 32px 32px;
+  background-position: center;
+  z-index: 0;
+  pointer-events: none;
+}
