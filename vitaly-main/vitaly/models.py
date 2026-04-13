@@ -110,7 +110,7 @@ class Sono (SoftDeleteModel):
     
 
 #treino
-class Treino(SoftDeleteModel):
+class Treino(SoftDeleteModel):  
     objects = SoftDeleteManager()  
     all_objects = models.Manager()
 

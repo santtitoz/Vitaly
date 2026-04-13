@@ -34,7 +34,7 @@ def log_estudo(estudo):
 
 def log_treino(treino):
     inicio = datetime.now()
-    fim = inicio + timedelta(hours=1)  # padrão (ajuste depois)
+    fim = inicio + timedelta(hours=1) 
 
     LogAtividade.objects.create(
         usuario=treino.usuario,
@@ -43,3 +43,19 @@ def log_treino(treino):
         fim=fim
     )
 
+def log_alimentacao(alimentacao):
+    LogAtividade.objects.create(
+        usuario=alimentacao.usuario,
+        tipo="alimentacao",
+        inicio=datetime.combine(alimentacao.data_registro, alimentacao.horario),
+        fim=datetime.combine(alimentacao.data_registro, alimentacao.horario) + timedelta(minutes=30)
+    )
+
+def log_hidratacao(hidratacao):
+    LogAtividade.objects.create(
+        usuario=hidratacao.usuario,
+        tipo="hidratacao",
+        inicio=datetime.combine(hidratacao.data_registro, datetime.min.time()),
+        fim=datetime.combine(hidratacao.data_registro, datetime.min.time()) + timedelta(minutes=5)
+    )
+    
