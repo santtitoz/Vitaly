@@ -28,7 +28,7 @@ class Hidratacaoserializer(serializers.ModelSerializer):
 class Alimentacaoserializer(serializers.ModelSerializer):
     class Meta:
         model = Alimentacao
-        fields = ['usuario','data_registro','quantidade_refeicoes','horarios','classificacao']
+        fields = ['usuario','data_registro','horario','tipo']
 
 class Estudoserializer(serializers.ModelSerializer):
     class Meta:
@@ -44,3 +44,7 @@ class Treinoserializer(serializers.ModelSerializer):
     class Meta:
         model = Treino
         fields = ['usuario','data_registro','quantidade_planejada','quantidade_realizada','status'] 
+
+class AuditoriaSerializer(serializers.Serializer):
+    tipo = serializers.CharField()
+    total = serializers.DurationField()
